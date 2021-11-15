@@ -29,10 +29,11 @@ pipeline {
         stage('Deliver') {
             agent any
             environment {
+                VOLUME = '$(pwd)/sources:/sources'
                 IMAGE = 'cdrx/pyinstaller-linux:python2'
             }
             steps {
-                sh "docker run --rm ${IMAGE} 'pyinstaller --onefile sources/add2vals.py'"
+                sh "docker run --rm ${IMAGE} 'pyinstaller --onefile add2vals.py'"
             }
             post {
                 success {
